@@ -1,0 +1,20 @@
+.board {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 16rem;
+  min-width: 16rem;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: #080808;
+  border-bottom: 1.5rem solid #242124;
+  border-radius: 1rem;
+  box-shadow: 0 0 4rem rgba(255, 20, 147, 0.8);
+}
+
+@media only screen and (min-width: 600px) {
+  .board {
+    transform: scale(1.1);
+  }
+}

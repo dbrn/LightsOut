@@ -1,0 +1,79 @@
+.led-button {
+  width: 2rem;
+  height: 2rem;
+  display: inline-block;
+  margin: 0.2rem;
+  transition: background-color height 0.2s;
+  border-radius: 2px;
+  border-bottom: 0.2rem solid black;
+}
+
+.led-button:hover {
+  background-color: yellow;
+  box-shadow: 0 0 1rem yellow;
+}
+
+@media only screen and (max-width: 600px) {
+  .led-button:hover {
+    background-color: rebeccapurple;
+    box-shadow: 0 0 1rem rgba(255, 255, 255, 0.2);
+  }
+  .led-button--0:hover {
+    background-color: rebeccapurple;
+  }
+  .led-button--1:hover {
+    background-color: #ff1493;
+  }
+}
+
+.led-button:active {
+  background-color: lightyellow;
+  box-shadow: 0 0 0.5rem lightyellow;
+  border-bottom: 0.1rem solid white;
+  height: 1.8rem;
+}
+
+.led-button--0 {
+  background-color: rebeccapurple;
+  border-bottom-color: gray;
+}
+
+.led-button--1 {
+  background-color: #ff1493;
+  box-shadow: 0 0 1rem #ff1493;
+  animation-name: blink;
+  animation-iteration-count: infinite;
+  opacity: 0.8;
+  width: 2rem;
+  height: 2rem;
+  display: inline-block;
+  z-index: 2;
+  border-bottom-color: pink;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.1;
+  }
+  5% {
+    opacity: 1;
+  }
+  7% {
+    opacity: 0.2;
+  }
+  10% {
+    opacity: 0.1;
+  }
+  13% {
+    opacity: 0.8;
+  }
+  15% {
+    opacity: 0.4;
+  }
+  18% {
+    opacity: 0.1;
+  }
+  20% {
+    opacity: 1;
+  }
+}

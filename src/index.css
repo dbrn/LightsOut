@@ -1,0 +1,70 @@
+body {
+  background-color: black;
+  color: #eee;
+  font-size: 1.2rem;
+  box-sizing: content-box;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-image: url("https://publicdomainpictures.net/pictures/80000/velka/rainbow-ribbon-background-13920716400pE.jpg");
+  background-position: center;
+  background-repeat: space;
+  background-size: cover;
+  height: 100vh;
+  overflow-y: hidden;
+}
+
+p {
+  font-family: "MuseoModerno", cursive;
+  color: #eee;
+  background-color: #080808;
+}
+
+h1 {
+  font-family: "Warnes", cursive;
+  color: purple;
+  position: relative;
+  text-shadow: 0px 0px 1rem #ff1493;
+  letter-spacing: -0.1rem;
+  user-select: none;
+}
+
+h1::after {
+  content: "LightsOut!";
+  color: #ff1493;
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: blink 6s infinite;
+  user-select: none;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  7% {
+    opacity: 0.2;
+  }
+  10% {
+    opacity: 0;
+  }
+  13% {
+    opacity: 0.8;
+  }
+  15% {
+    opacity: 0.4;
+  }
+  18% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+}
