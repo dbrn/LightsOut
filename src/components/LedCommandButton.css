@@ -1,0 +1,58 @@
+.led-command-btn {
+  margin-top: 0.2rem;
+  min-width: 11.6rem;
+  min-height: 2rem;
+  display: inline-block;
+  background-color: #d15151;
+  cursor: pointer;
+  border-radius: 2px;
+  border-bottom: 0.2rem solid lightcoral;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.66);
+  transition: all 0.2s;
+  box-shadow: 0 0 1rem #d15151;
+  font-family: "MuseoModerno", cursive;
+  user-select: none;
+  animation: blink 5s 3s infinite;
+}
+
+.led-command-btn:hover {
+  background-color: yellow;
+  border-bottom: 0.2rem solid lightyellow;
+  box-shadow: 0 0 1rem yellow;
+}
+
+.led-command-btn:active {
+  background-color: lightyellow;
+  box-shadow: 0 0 0.5rem lightyellow;
+  border-bottom: 0.1rem solid white;
+  height: 1.8rem;
+  color: rgba(0, 0, 0, 0.66);
+  padding-top: 0.2rem;
+}
+
+.led-command-btn--win {
+  background-color: lawngreen;
+  border-bottom: 0.2rem solid lightgreen;
+  box-shadow: 0 0 1rem lawngreen;
+  color: rgba(0, 0, 0, 0.66);
+  animation: pulsate 2s infinite;
+}
+
+.led-command-btn--refresh {
+  background-color: orange;
+  border-bottom: 0.2rem solid lightsalmon;
+  box-shadow: 0 0 1rem orange;
+  color: rgba(0, 0, 0, 0.66);
+}
+
+@keyframes pulsate {
+  0% {
+    opacity: 1;
+    color: rgba(0, 0, 0, 0.66);
+  }
+  50% {
+    opacity: 0.5;
+    color: rgba(0, 0, 0, 0.33);
+  }
+}

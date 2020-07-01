@@ -1,7 +1,6 @@
 import React from "react";
 import NewGameMenu from "./components/NewGameMenu";
 import Board from "./components/Board";
-import { Button } from "react-bootstrap";
 
 class App extends React.Component {
   static defaultProps = {
@@ -13,6 +12,7 @@ class App extends React.Component {
     this.state = {
       gameRunning: false,
       seed: this.getRandomSeed(),
+      binarySeed: null,
       winner: false,
       numberOfMoves: 0,
     };
@@ -20,6 +20,10 @@ class App extends React.Component {
     this.getBinarySeed = this.getBinarySeed.bind(this);
     this.getRandomSeed = this.getRandomSeed.bind(this);
     this.resetGame = this.resetGame.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({ binarySeed: this.getBinarySeed() });
   }
 
   getRandomSeed() {
@@ -31,12 +35,15 @@ class App extends React.Component {
   }
 
   resetGame() {
-    this.setState({
-      winner: false,
-      gameRunning: false,
-      numberOfMoves: 0,
-      seed: this.getRandomSeed(),
-    });
+    this.setState(
+      {
+        winner: false,
+        gameRunning: false,
+        numberOfMoves: 0,
+        seed: this.getRandomSeed(),
+      },
+      () => this.setState({ binarySeed: this.getBinarySeed() })
+    );
   }
 
   render() {
@@ -65,9 +72,9 @@ class App extends React.Component {
             }
           />
         )}
-        {this.state.gameRunning && (
+        {this.state.gameRunning && this.state.binarySeed && (
           <Board
-            binarySeed={this.getBinarySeed()}
+            binarySeed={this.state.binarySeed}
             setGameEnd={() => this.setState({ winner: true })}
             seed={this.state.seed}
             addMove={() =>
@@ -77,14 +84,17 @@ class App extends React.Component {
             }
             numberOfMoves={this.state.numberOfMoves}
             winner={this.state.winner}
+            onLedCommandPress={this.resetGame}
+            refresh={() =>
+              new Promise((resolve, reject) => {
+                this.setState({ seed: this.getRandomSeed() }, () =>
+                  this.setState({ binarySeed: this.getBinarySeed() }, () => {
+                    resolve(true);
+                  })
+                );
+              })
+            }
           />
-        )}
-        {this.state.winner && (
-          <div className="d-flex justify-content-center">
-            <Button variant="dark" onClick={this.resetGame}>
-              RESTART
-            </Button>
-          </div>
         )}
       </div>
     );

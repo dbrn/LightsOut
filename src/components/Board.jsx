@@ -1,5 +1,6 @@
 import React from "react";
 import LedButton from "./LedButton";
+import LedCommandButton from "./LedCommandButton";
 
 import "./Board.css";
 
@@ -12,18 +13,6 @@ class Board extends React.Component {
 
     this.fillBinaryArray = this.fillBinaryArray.bind(this);
     this.handleLedPress = this.handleLedPress.bind(this);
-  }
-
-  componentDidUpdate() {
-    if (!this.props.winner) {
-      const flatArray = [];
-      this.state.binaryArray.forEach((row) => {
-        row.forEach((bit) => flatArray.push(bit));
-      });
-      if (flatArray.every((bit) => bit.toString() === "0")) {
-        this.props.setGameEnd();
-      }
-    }
   }
 
   fillBinaryArray(binarySeed) {
@@ -49,7 +38,25 @@ class Board extends React.Component {
       workBinaryArray[y][x - 1] = workBinaryArray[y][x - 1] === "1" ? "0" : "1";
     if (x + 1 <= 4)
       workBinaryArray[y][x + 1] = workBinaryArray[y][x + 1] === "1" ? "0" : "1";
-    this.setState({ binaryArray: [...workBinaryArray] });
+    this.setState({ binaryArray: [...workBinaryArray] }, () => {
+      const flatArray = [];
+      this.state.binaryArray.forEach((row) => {
+        row.forEach((bit) => flatArray.push(bit));
+      });
+      if (flatArray.every((bit) => bit.toString() === "0")) {
+        this.props.setGameEnd();
+      } else if (
+        flatArray.slice(0, 23).every((bit) => bit.toString() === "0") &&
+        flatArray.slice(23).some((bit) => bit.toString() === "1")
+      )
+        this.props.refresh().then((response) => {
+          if (response) {
+            this.setState({
+              binaryArray: [...this.fillBinaryArray(this.props.binarySeed)],
+            });
+          }
+        });
+    });
     this.props.addMove();
   }
 
@@ -70,6 +77,12 @@ class Board extends React.Component {
                 );
               });
             })}
+          <div>
+            <LedCommandButton
+              winner={this.props.winner}
+              onLedCommandPress={this.props.onLedCommandPress}
+            />
+          </div>
         </div>
         <div className="text-center text-background pb-1">
           <p>Current seed: {this.props.seed}</p>
